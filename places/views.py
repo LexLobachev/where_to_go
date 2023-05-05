@@ -11,8 +11,8 @@ def index(request):
             "geometry": {
                 "type": "Point",
                 "coordinates": [
-                    place.lon,
-                    place.lat
+                    place.lat,
+                    place.lon
                 ]
             },
             "properties": {
@@ -26,5 +26,4 @@ def index(request):
         "type": "FeatureCollection",
         "features": places
     }
-    print(collection)
     return render(request, 'index.html', context={"geo_json": collection})
