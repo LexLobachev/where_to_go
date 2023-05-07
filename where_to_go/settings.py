@@ -135,7 +135,7 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", os.path.join(BASE_DIR, 'media'))
 
-STATIC_ROOT = os.getenv("STATIC_ROOT")
+STATIC_ROOT = os.getenv("STATIC_ROOT", os.path.join(BASE_DIR, 'assets'))
 
 MEDIA_URL = os.getenv('MEDIA_URL', '/media/')
 
