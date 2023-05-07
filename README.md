@@ -1,6 +1,7 @@
 # Карта интересных мест
 
 Блог на Django, серверная часть.
+Посмотреть работающий демо_сайт можно по [ссылке](https://lexlobachev.pythonanywhere.com/).
 
 ## Запуск
 
@@ -9,6 +10,8 @@
 
 - Скачайте код
 - Установите зависимости командой `pip install -r requirements.txt`
+- Выполните миграции командами `python3 manage.py makemigrations` и `python3 manage.py migrate`
+- Создайте суперпользователя командой `python3 manage.py createsuperuser`
 - Запустите сервер командой `python3 manage.py runserver`
 
 После этого переходите по ссылке [127.0.0.1:8000](http://127.0.0.1:8000), вы увидите главную страницу.
