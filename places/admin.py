@@ -19,6 +19,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 class AdminPlace(SortableAdminMixin, admin.ModelAdmin):
     inlines = [ImageInline]
     list_display = ['title']
+    search_fields = ['title']
 
 
 @admin.register(Image)
