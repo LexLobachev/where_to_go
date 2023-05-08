@@ -16,12 +16,12 @@ def get_place_json(url):
 
 def load_place(place_url):
     place_json = get_place_json(place_url)
-    place = Place.objects.update_or_create(
+    place, created = Place.objects.update_or_create(
         title=place_json['title'],
         description_short=place_json['description_short'],
         description_long=place_json['description_long'],
-        lon=place_json['coordinates']['lng'],
-        lat=place_json['coordinates']['lat']
+        lat=place_json['coordinates']['lng'],
+        lon=place_json['coordinates']['lat'],
     )
 
     for index, img in enumerate(place_json['imgs'], 1):
@@ -30,9 +30,7 @@ def load_place(place_url):
         Image.objects.update_or_create(
             place=place,
             position=index,
-            defaults={
-                'image': ContentFile(response.content, name=f'image{index}.jpeg')
-            },
+            image=ContentFile(response.content, name=f'image{index}.jpeg')
         )
 
 
@@ -52,4 +50,6 @@ class Command(BaseCommand):
                 logging.error('No internet, will try to reconnect in 10 seconds')
                 time.sleep(10)
             except requests.exceptions.HTTPError as ex:
+                logging.error(f'Something went wrong {ex}')
+            except requests.exceptions.JSONDecodeError as ex:
                 logging.error(f'Something went wrong {ex}')
