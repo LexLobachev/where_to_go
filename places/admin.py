@@ -9,10 +9,10 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
     exta = 0
 
-    def get_place_images(self, object):
+    def get_place_image(self, object):
         return format_html(f'<img src="{object.image.url}" height=200px />')
 
-    readonly_fields = ['get_place_images']
+    readonly_fields = ['get_place_image']
 
 
 @admin.register(Place)
