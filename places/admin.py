@@ -10,7 +10,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     exta = 0
 
     def get_place_image(self, place):
-        return format_html(f'<img src="{place.image.url}" height=200px />')
+        return format_html('<img src="{}" height=200px />', place.image.url)
 
     readonly_fields = ['get_place_image']
 
