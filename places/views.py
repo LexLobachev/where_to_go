@@ -31,8 +31,8 @@ def index(request):
     return render(request, 'index.html', context={'geo_json': collection})
 
 
-def get_place(request, id):
-    place = get_object_or_404(Place, id=id)
+def get_place(request, place_id):
+    place = get_object_or_404(Place, id=place_id)
     images_urls = [item.image.url for item in place.images.all()]
     response_data = {
         'title': place.title,
