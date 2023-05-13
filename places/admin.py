@@ -1,4 +1,4 @@
-from adminsortable2.admin import SortableAdminMixin, SortableInlineAdminMixin
+from adminsortable2.admin import SortableAdminBase, SortableInlineAdminMixin
 from django.contrib import admin
 from django.utils.html import format_html
 
@@ -16,7 +16,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
 
 @admin.register(Place)
-class AdminPlace(SortableAdminMixin, admin.ModelAdmin):
+class AdminPlace(SortableAdminBase, admin.ModelAdmin):
     inlines = [ImageInline]
     list_display = ['title']
     search_fields = ['title']
