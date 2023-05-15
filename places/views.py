@@ -40,7 +40,7 @@ def index(request):
 def get_place(request, place_id):
     place = get_object_or_404(Place, id=place_id)
     images_urls = [item.image.url for item in place.images.all()]
-    response_data = {
+    response_payload = {
         'title': place.title,
         'imgs': images_urls,
         'description_short': place.description_short,
@@ -50,4 +50,4 @@ def get_place(request, place_id):
             'lat': place.lon,
         },
     }
-    return JsonResponse(response_data, json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(response_payload, json_dumps_params={'ensure_ascii': False, 'indent': 2})
