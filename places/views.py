@@ -50,4 +50,4 @@ def get_place(request, place_id):
             'lat': place.lon,
         },
     }
-    return JsonResponse(response_data, safe=False, json_dumps_params={'ensure_ascii': False, 'indent': 2})
+    return JsonResponse(response_data, json_dumps_params={'ensure_ascii': False, 'indent': 2})
