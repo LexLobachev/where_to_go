@@ -12,6 +12,7 @@ def index(request):
     for place in places:
         place = {
             'type': 'Feature',
+
             'geometry': {
                 'type': 'Point',
                 'coordinates': [
@@ -19,6 +20,7 @@ def index(request):
                     place.lon
                 ]
             },
+
             'properties': {
                 'title': place.title,
                 'placeId': place.id,
