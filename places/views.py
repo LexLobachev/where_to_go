@@ -8,6 +8,7 @@ from places.models import Place
 def index(request):
     features = []
     places = Place.objects.all()
+
     for place in places:
         place = {
             'type': 'Feature',
@@ -25,10 +26,12 @@ def index(request):
             }
         }
         features.append(place)
+
     collection = {
         'type': 'FeatureCollection',
         'features': features
     }
+
     return render(request, 'index.html', context={'geo_json': collection})
 
 
