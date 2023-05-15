@@ -27,7 +27,7 @@
 - Установите зависимости командой `pip install -r requirements.txt`
 - Выполните миграции командой`python3 manage.py migrate`
   - Создайте суперпользователя командой `python3 manage.py createsuperuser`
-    - Добавить новые места можно либо через [админку](http://127.0.0.1:8000/admin),
+    - Добавить новые места можно либо через [админку](http://127.0.0.1:8000/admin/),
       либо с помощью команды
         ```bash
         $ python manage.py load_place -url <ссылка на json файл>
