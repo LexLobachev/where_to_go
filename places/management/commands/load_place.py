@@ -8,14 +8,10 @@ from django.core.management.base import BaseCommand
 from places.models import Image, Place
 
 
-def get_place_json(url):
-    response = requests.get(url, allow_redirects=True)
-    response.raise_for_status()
-    return response.json()
-
-
 def load_place(place_url):
-    place_json = get_place_json(place_url)
+    response = requests.get(place_url, allow_redirects=True)
+    response.raise_for_status()
+    place_json = response.json()
     place, created = Place.objects.update_or_create(
         title=place_json['title'],
         description_short=place_json['description_short'],
