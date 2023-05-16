@@ -49,7 +49,7 @@ class Command(BaseCommand):
             except requests.exceptions.ConnectionError:
                 logging.error('No internet, will try to reconnect in 10 seconds')
                 time.sleep(10)
-            except requests.exceptions.HTTPError as ex:
-                logging.error(f'Something went wrong {ex}')
-            except requests.exceptions.JSONDecodeError as ex:
-                logging.error(f'Something went wrong {ex}')
+            except requests.exceptions.HTTPError as err:
+                logging.error(f'Something went wrong {err}')
+            except requests.exceptions.JSONDecodeError as err:
+                logging.error(f'Something went wrong {err}')
