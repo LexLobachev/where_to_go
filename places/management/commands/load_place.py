@@ -15,8 +15,8 @@ def load_place(place_url):
     place, created = Place.objects.get_or_create(
         title=place_json['title'],
         defaults={
-            'description_short': place_json['description_short'],
-            'description_lon': place_json['description_long'],
+            'description_short': place_json.get('description_short', ''),
+            'description_lon': place_json.get('description_long', ''),
             'lat': place_json['coordinates']['lng'],
             'lon': place_json['coordinates']['lat']
         }
@@ -27,9 +27,9 @@ def load_place(place_url):
         response.raise_for_status()
         Image.objects.get_or_create(
             place=place,
-            position=index,
+            image=ContentFile(response.content, name=f'image{index}.jpeg'),
             defaults={
-                'image': ContentFile(response.content, name=f'image{index}.jpeg')
+                'position': index
             }
         )
 
