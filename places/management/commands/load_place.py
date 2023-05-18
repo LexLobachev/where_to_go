@@ -11,18 +11,18 @@ from places.models import Image, Place
 def load_place(place_url):
     response = requests.get(place_url, allow_redirects=True)
     response.raise_for_status()
-    place_json = response.json()
+    raw_place = response.json()
     place, created = Place.objects.get_or_create(
-        title=place_json['title'],
+        title=raw_place['title'],
         defaults={
-            'description_short': place_json.get('description_short', ''),
-            'description_lon': place_json.get('description_long', ''),
-            'lat': place_json['coordinates']['lng'],
-            'lon': place_json['coordinates']['lat']
+            'description_short': raw_place.get('description_short', ''),
+            'description_lon': raw_place.get('description_long', ''),
+            'lat': raw_place['coordinates']['lng'],
+            'lon': raw_place['coordinates']['lat']
         }
     )
 
-    for index, img in enumerate(place_json['imgs'], 1):
+    for index, img in enumerate(raw_place.get('imgs', []), 1):
         response = requests.get(img)
         response.raise_for_status()
         Image.objects.get_or_create(
@@ -45,9 +45,6 @@ class Command(BaseCommand):
         try:
             load_place(place_url)
         except requests.exceptions.ConnectionError:
-            logging.error('No internet, will try to reconnect in 10 seconds')
-            time.sleep(10)
-        except requests.exceptions.HTTPError as err:
-            logging.error(f'Something went wrong {err}')
-        except requests.exceptions.JSONDecodeError as err:
+            logging.error('No internet')
+        except (requests.exceptions.HTTPError, requests.exceptions.JSONDecodeError) as err:
             logging.error(f'Something went wrong {err}')
